@@ -1,0 +1,53 @@
+{
+  "name": "apotule",
+  "version": "0.2.3",
+  "description": "Descargas de video",
+  "author": "Yandel Diaz",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yandeldiaz777/a-po-tu-le-da.git"
+  },
+  "homepage": "https://github.com/yandeldiaz777/a-po-tu-le-da#readme",
+  "bugs": {
+    "url": "https://github.com/yandeldiaz777/a-po-tu-le-da/issues"
+  },
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder"
+  },
+  "build": {
+    "appId": "com.yandeldiaz.apotule",
+    "productName": "A po tu le da",
+    "files": [
+      "*.js",
+      "*.html",
+      "*.css"
+    ],
+    "mac": {
+      "target": "zip",
+      "identity": null,
+      "extraResources": [
+        {
+          "from": "tools",
+          "to": "tools"
+        }
+      ]
+    },
+    "win": {
+      "target": "portable",
+      "extraResources": [
+        {
+          "from": "tools",
+          "to": "tools"
+        }
+      ]
+    },
+    "artifactName": "Apotule-${os}-${arch}.${ext}"
+  },
+  "devDependencies": {
+    "electron": "^45.2.2",
+    "electron-builder": "^26.18.0"
+  }
+}

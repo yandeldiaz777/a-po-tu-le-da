@@ -1,0 +1,30 @@
+<!doctype html><html lang="es"><!-- Autor del código de la aplicación — Yandel Diaz --><head><meta name="author" content="Yandel Diaz"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; script-src 'self'"><title>A po tu le da?</title><link rel="stylesheet" href="style.css"><script src="ui.js" defer></script></head>
+<body><main>
+<header><span class="brand">⚡ APOTULE</span><span class="local"><i></i> EN TU EQUIPO</span></header>
+<section class="hero"><h1>A po tu le da<span>?</span></h1><p>Elige de dónde quieres bajar el video.</p></section>
+<nav class="platforms" role="tablist" aria-label="Plataformas">
+<button type="button" id="tab-tiktok" class="platform" data-platform="tiktok" role="tab" aria-controls="platform-panel" aria-selected="true"><span aria-hidden="true">♪</span> TikTok</button>
+<button type="button" id="tab-instagram" class="platform" data-platform="instagram" role="tab" aria-controls="platform-panel" aria-selected="false" tabindex="-1"><span aria-hidden="true">◎</span> Instagram</button>
+<button type="button" id="tab-youtube" class="platform" data-platform="youtube" role="tab" aria-controls="platform-panel" aria-selected="false" tabindex="-1"><span aria-hidden="true">▶</span> YouTube</button>
+</nav>
+<div id="platform-panel" role="tabpanel" aria-labelledby="tab-tiktok" data-platform="tiktok">
+<div class="layout">
+<section class="panel composer">
+<h2 id="platform-title">TikTok</h2>
+<p id="platform-description" class="platform-description">Baja un video suelto o los videos disponibles de un perfil público.</p>
+<form id="form"><fieldset id="tiktok-mode"><legend>¿Qué quieres bajar?</legend><label><input type="radio" name="mode" value="video" checked> Un video</label><label><input type="radio" name="mode" value="profile"> Perfil completo</label></fieldset>
+<label for="url" class="field">Enlace</label><div class="entry"><input id="url" type="text" placeholder="Pega el enlace del video" required maxlength="2048"><button class="primary">Descargar ↓</button></div>
+<p id="notice" role="status"></p></form>
+</section>
+<aside class="panel settings"><h2>Ajustes</h2><label class="turbo"><input id="turbo" type="checkbox"> Uso de red ×5</label><p>Hasta cinco fragmentos por descarga cuando el sitio lo permite.</p><button id="pick">Cambiar carpeta</button> <button id="open">Abrir</button><p id="folder"></p><p id="settings-notice" role="status"></p></aside>
+</div>
+<section class="panel queue">
+<div class="queuehead"><h2 id="queue-title">Descargas de TikTok</h2><span>Hasta 4 a la vez en total</span></div>
+<p id="empty">Los videos de TikTok aparecerán aquí.</p>
+<div id="jobs"></div>
+<details id="waiting" hidden><summary id="waiting-summary">En espera</summary><div id="waiting-jobs"></div></details>
+<details id="history" hidden><summary id="history-summary">Terminadas</summary><div id="history-jobs"></div></details>
+</section>
+</div>
+<footer>Autor del código de la aplicación <strong>Yandel Diaz</strong></footer>
+</main></body></html>

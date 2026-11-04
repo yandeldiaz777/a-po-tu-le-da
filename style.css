@@ -1,0 +1,58 @@
+/* A po tu le da? · Autor del código de la aplicación — Yandel Diaz */
+:root{color-scheme:dark;font-family:system-ui,sans-serif;background:#100c1b;color:#f8f3ff;--muted:#bbb0cf;--pink:#ff66db;--green:#ccff69;--line:#433552}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 75% 0%,#47205f 0%,transparent 45%),radial-gradient(ellipse at 0% 55%,#22224f 0%,transparent 50%)}main{max-width:1120px;margin:auto;padding:26px 40px}header,.queuehead{display:flex;justify-content:space-between;align-items:center;gap:12px}.brand,.local,.eyebrow{font-size:12px;font-weight:800;letter-spacing:.17em}.brand,.local{padding:9px 13px;border:1px solid var(--line);border-radius:100px;background:#171022}.local{color:var(--green);font-size:10px}i{display:inline-block;width:7px;height:7px;background:var(--green);border-radius:50%;margin-right:5px}.hero{padding:36px 0 28px}.eyebrow{color:#dfceff}.eyebrow b{color:var(--pink);margin:0 8px}h1{font-size:clamp(56px,8vw,104px);letter-spacing:-.085em;line-height:1;margin:12px 0;background:linear-gradient(95deg,#fff 10%,#ff86dc 50%,#a8a6ff 85%);background-clip:text;color:transparent;width:fit-content}h1 span{color:var(--green)}p{color:var(--muted);margin:8px 0;line-height:1.45}.layout{display:grid;grid-template-columns:minmax(0,2.15fr) minmax(230px,1fr);gap:14px}.panel{background:#191225e8;border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 12px 30px #08051044}fieldset{padding:0;border:0;margin:0 0 14px}legend,.field,h2{font-weight:800;font-size:15px;margin:0 0 8px}fieldset label{display:inline-flex;align-items:center;gap:6px;margin-right:12px;font-size:14px}input{accent-color:var(--pink)}.field{display:block}.entry{display:flex;gap:8px}.entry input{min-width:0;width:100%;border:1px solid var(--line);background:#100b19;border-radius:11px;padding:12px;color:white;font:inherit}button{border:1px solid var(--line);border-radius:10px;padding:8px 11px;background:#2a2039;color:#fff;font:inherit;font-size:13px;cursor:pointer;transition:background .15s,transform .15s}button:hover{background:#48335c}button:active{transform:translateY(1px)}:focus-visible{outline:2px solid var(--pink);outline-offset:3px}.primary{background:var(--green);color:#171c0b;font-weight:850;white-space:nowrap;border-color:transparent}.primary:hover{background:#e0ffa5}.settings p,#notice{font-size:12px}.turbo{font-weight:700;font-size:14px}.settings #folder{overflow-wrap:anywhere}.queue{margin-top:14px}.queuehead h2{margin:0}.queuehead span{color:var(--green);font-size:12px}.job{padding:12px 0;border-top:1px solid var(--line);margin-top:9px}.job p{overflow-wrap:anywhere;font-size:12px}.job progress{width:100%;accent-color:var(--pink)}footer{color:var(--muted);text-align:right;font-size:12px;padding:18px 0}footer strong{color:#f2dfff}@media(max-width:760px){main{padding:20px}.layout{grid-template-columns:1fr}.hero{padding:26px 0}}@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.hero { padding: 26px 0 24px; }
+h1 { letter-spacing: -.064em; }
+.platforms { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px; }
+[data-platform=tiktok] { --platform-accent: #85f9f0; }
+[data-platform=instagram] { --platform-accent: #ffa1e5; }
+[data-platform=youtube] { --platform-accent: #ff8f9d; }
+.platform { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 8px; font-weight: 750; }
+.platform span { color: var(--platform-accent); font-size: 16px; line-height: 1; }
+.platform[aria-selected=true] { border-color: var(--platform-accent); color: var(--platform-accent); background: #292039; }
+.platform-description { font-size: 14px; margin: 0 0 14px; }
+#platform-panel { min-width: 0; }
+#platform-title { color: var(--platform-accent); font-size: 20px; }
+#platform-panel .job progress { accent-color: var(--platform-accent); }
+.settings { align-self: start; }
+@media (max-width: 760px) { .settings { grid-row: 2; } }
+
+.hero { padding: 16px 0 18px; }
+h1 { font-size: clamp(48px, 7vw, 84px); margin: 10px 0; }
+.panel { padding: 18px; }
+.job { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 5px 12px; padding: 12px 0; }
+.job-head { min-width: 0; display: flex; gap: 10px; align-items: center; }
+.job-head strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; }
+.job-head span { margin-left: auto; flex-shrink: 0; color: var(--platform-accent); font-size: 11px; }
+.job progress { grid-column: 1; height: 5px; }
+.job .transfer, .job .job-error { grid-column: 1; margin: 0; font-size: 11px; }
+.job .job-error { color: #ffb8c6; overflow-wrap: anywhere; }
+.job > button { grid-column: 2; grid-row: 1 / span 3; align-self: center; font-size: 11px; padding: 6px 9px; }
+details { border-top: 1px solid var(--line); margin-top: 12px; }
+summary { padding: 12px 0 0; cursor: pointer; font-size: 13px; color: var(--muted); }
+details .job { padding: 9px 0; }
+details .job-head span { font-size: 10px; }
+details .job-head strong { font-weight: 500; }
+details > div { max-height: 280px; overflow-y: auto; padding-right: 5px; }
+[hidden] { display: none !important; }
+@media (max-width: 760px) {
+  .hero { padding-top: 12px; }
+  .job-head { align-items: start; flex-direction: column; gap: 3px; }
+  .job-head span { margin-left: 0; }
+  .job-head strong { max-width: 100%; }
+}
+
+main { padding-top: 20px; }
+.hero { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px 0; }
+h1 { font-size: clamp(40px, 6vw, 64px); margin: 0; flex-shrink: 0; }
+.hero > p { max-width: 250px; text-align: right; font-size: 14px; }
+#jobs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 22px; }
+#jobs .job-head { flex-direction: column; align-items: start; gap: 4px; }
+#jobs .job-head strong { max-width: 100%; }
+#jobs .job-head span { margin-left: 0; }
+@media (max-width: 760px) {
+  .hero { display: block; }
+  .hero > p { max-width: none; text-align: left; }
+  #jobs { grid-template-columns: 1fr; }
+}

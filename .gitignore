@@ -1,0 +1,14 @@
+node_modules/
+tools/
+dist/
+release/
+out/
+*.log
+*.zip
+*.dmg
+*.exe
+*.part
+.DS_Store
+.env
+.env.*
+!.env.example
