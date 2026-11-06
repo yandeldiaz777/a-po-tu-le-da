@@ -40,14 +40,26 @@ function notice(platform, message) {
 function showPlaceholder() {
   url.placeholder = profile() ? '@usuario o enlace del perfil' : platforms[active].placeholder;
 }
+function recognizeTikTokInput() {
+  if (active !== 'tiktok') return;
+  const mode = tiktokInputMode(url.value);
+  if (!mode) return;
+  document.querySelector('[value=profile]').checked = mode === 'profile';
+  document.querySelector('[value=video]').checked = mode === 'video';
+  showPlaceholder();
+}
 function renderRows(platform) {
   if (platform !== active) return;
   const rows = [...platforms[platform].rows.values()];
-  for (const [group, target] of [['active', 'jobs'], ['waiting', 'waiting-jobs'], ['history', 'history-jobs']]) {
+  for (const [group, target] of [['active', 'jobs'], ['failed', 'failed-jobs'], ['waiting', 'waiting-jobs'], ['history', 'history-jobs']]) {
     byId(target).replaceChildren(...rows.filter(row => row.dataset.group === group));
   }
   const waiting = byId('waiting-jobs').children.length;
   const history = byId('history-jobs').children.length;
+  const failed = byId('failed-jobs').children.length;
+  byId('failed').hidden = failed === 0;
+  byId('failed').open = failed > 0;
+  byId('failed-summary').textContent = 'Necesitan atención · ' + failed;
   byId('waiting').hidden = waiting === 0;
   byId('history').hidden = history === 0;
   byId('waiting-summary').textContent = 'En espera · ' + waiting;
@@ -112,7 +124,10 @@ for (const [index, tab] of tabs.entries()) {
   };
 }
 select(tabs[0]);
-url.oninput = () => { platforms[active].draft = url.value; };
+url.oninput = () => {
+  platforms[active].draft = url.value;
+  recognizeTikTokInput();
+};
 byId('tiktok-mode').onchange = showPlaceholder;
 api.folder().then(showFolder).catch(settingsError);
 byId('pick').onclick = () => api.pick().then(folder => { showFolder(folder); settingsNotice(''); }).catch(settingsError);
@@ -121,6 +136,7 @@ byId('form').onsubmit = async event => {
   event.preventDefault();
   const platform = active;
   const draft = url.value;
+  recognizeTikTokInput();
   platforms[platform].draft = draft;
   try {
     notice(platform, await api.add(draft.trim(),platform,profile(),byId('turbo').checked));
@@ -165,8 +181,8 @@ api.onJob(job => {
   if (job.state === 'Descargando' && Number.isFinite(job.eta)) metrics.push('Quedan ' + formatTime(job.eta));
   transfer.textContent = metrics.join(' · ');
   transfer.hidden = metrics.length === 0;
-  const group = job.state === 'En cola' ? 'waiting' :
-    ['Listo', 'Falló', 'Cancelado'].includes(job.state) ? 'history' : 'active';
+  const group = job.state === 'En cola' ? 'waiting' : job.state === 'Falló' ? 'failed' :
+    ['Listo', 'Cancelado'].includes(job.state) ? 'history' : 'active';
   progress.hidden = group !== 'active';
   if (row.dataset.group !== group) {
     row.dataset.group = group;

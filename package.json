@@ -1,6 +1,6 @@
 {
   "name": "apotule",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Descargas de video",
   "author": "Yandel Diaz",
   "license": "MIT",
@@ -15,7 +15,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "pack": "electron-builder"
+    "pack": "electron-builder",
+    "test": "node --test"
   },
   "build": {
     "appId": "com.yandeldiaz.apotule",

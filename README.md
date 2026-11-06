@@ -2,7 +2,7 @@
 
 Una app de **Yandel Diaz** para guardar videos de TikTok, Instagram y YouTube.
 
-Pega un enlace, elige dónde guardarlo y dale a descargar. Cada plataforma tiene su pestaña. En TikTok también puedes bajar los videos disponibles de un perfil público.
+Pega un enlace, elige dónde guardarlo y dale a descargar. Cada plataforma tiene su pestaña. En TikTok la app reconoce si pegaste un video o un perfil y selecciona la opción correspondiente.
 
 ## Qué puedes hacer
 
@@ -11,6 +11,7 @@ Pega un enlace, elige dónde guardarlo y dale a descargar. Cada plataforma tiene
 - Ver el progreso, la velocidad y el tiempo restante.
 - Continuar descargas parciales cuando el servidor lo permite.
 - Reconocer los videos que ya están guardados.
+- Ver los errores en una sección abierta para saber qué necesita atención.
 
 El ajuste **Uso de red ×5** permite descargar hasta cinco fragmentos en paralelo por video compatible. La velocidad final depende de la conexión y del sitio.
 

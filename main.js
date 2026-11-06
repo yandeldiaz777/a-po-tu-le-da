@@ -3,6 +3,7 @@ const {app, BrowserWindow, dialog, ipcMain, shell} = require('electron');
 const {spawn} = require('node:child_process');
 const {existsSync, mkdirSync, readdirSync} = require('node:fs');
 const path = require('node:path');
+const {tiktokInputMode} = require('./tiktok-input');
 
 let window;
 let folder;
@@ -149,7 +150,7 @@ function pump() {
     }, (code, error) => {
       running.delete(job.id);
       update(job, cancelled ? {state:'Cancelado'} : code === 0 ? {state:'Listo', progress:100} :
-        {state:'Falló', detail:error ? 'No pude iniciar el motor de descarga.' : detail || 'La descarga se interrumpió.'});
+        {state:'Falló', detail:error ? 'No pude iniciar el motor de descarga. Comprueba que yt-dlp está instalado o usa el paquete completo de la app.' : detail || 'La descarga se interrumpió.'});
       jobs.delete(job.id);
       pump();
     });
@@ -178,22 +179,27 @@ else app.whenReady().then(() => {
   });
   register('open', () => { mkdirSync(folder,{recursive:true}); return shell.openPath(folder); });
   register('add', (input, platform, profile, turbo) => {
-    const url = parse(input, platform, profile === true);
+    const isProfile = profile === true || platform === 'tiktok' && tiktokInputMode(input) === 'profile';
+    const url = parse(input, platform, isProfile);
     const destination = folder;
     const completed = completedVideos(destination, platform);
-    if (profile !== true) { queue(url,platform,turbo === true,destination,completed); pump(); return 'Enlace añadido.'; }
+    if (!isProfile) { queue(url,platform,turbo === true,destination,completed); pump(); return 'Enlace añadido.'; }
     if (listing) throw Error('Ya estamos buscando videos de un perfil.');
     listing = true;
     let count = 0;
+    let failure = '';
     run(['--flat-playlist','--lazy-playlist','--print','%(id)s','--',url], line => {
+      if (line.startsWith('ERROR:')) failure = line.replace(/https?:\/\/\S+/g, '[enlace]').slice(0, 400);
       if (!/^\d{12,25}$/.test(line)) return;
       count++;
       queue(url + '/video/' + line,platform,turbo === true,destination,completed);
       pump();
-    }, code => {
+    }, (code, error) => {
       listing = false;
       const message = code === 0 && count ? 'Videos del perfil encontrados: ' + count : count ?
-        'TikTok interrumpió la búsqueda. Se añadieron ' + count + ' videos.' : 'No pude encontrar videos en ese perfil.';
+        'TikTok interrumpió la búsqueda. Se añadieron ' + count + ' videos.' :
+        error ? 'No pude iniciar el motor de descarga. Comprueba que yt-dlp está instalado o usa el paquete completo de la app.' :
+        failure || 'No pude encontrar videos en ese perfil.';
       send('notice', {platform, message});
     });
     return 'Buscando videos en el perfil…';
